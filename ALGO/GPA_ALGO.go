@@ -6,7 +6,7 @@ import (
 
 //百分之学分绩点计算方法
 //将单科成绩和学分转化为单门课程的学分绩点
-func toGp(score [2]float64) (float64, error) {
+func toGp(score []float64) (float64, error) {
 	var Gp float64
 	switch {
 	case 100 < score[0]:
@@ -22,7 +22,7 @@ func toGp(score [2]float64) (float64, error) {
 }
 
 //计算全部科目的平均学分绩
-func ToGpa(rows [63][2]float64) (float64, error) {
+func ToGpa(rows [][]float64) (float64, error) {
 
 	var Gps, credits float64
 

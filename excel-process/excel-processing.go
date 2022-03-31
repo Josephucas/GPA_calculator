@@ -10,8 +10,8 @@ import (
 //这里不好的是，我没有返回一个切块，导致必须在excel中查看有多少们课，这里是63
 //后续可以改进
 
-func Read(path string) ([63][2]float64, error) {
-	var numbers [63][2]float64
+func Read(path string) ([][]float64, error) {
+	var numbers [][]float64
 	f, err := excelize.OpenFile(path)
 	if err != nil {
 		fmt.Println(err)
@@ -31,21 +31,24 @@ func Read(path string) ([63][2]float64, error) {
 		return numbers, err
 	}
 	numbers = convert(rows)
-	//for _, row := range rows {
-	//	for _, colCell := range row {
-	//		fmt.Print(colCell, "\t")
-	//	}
-	//	fmt.Println()
-	//}
+	//print!
+	for _, row := range rows {
+		for _, colCell := range row {
+			fmt.Print(colCell, "\t")
+		}
+		fmt.Println()
+	}
 	return numbers, nil
 }
 
 //转换将读取到的数据由string转换为float64类型的二维数组数据
-func convert(rows [][]string) [63][2]float64 {
-	var numbers [63][2]float64
-	for i, row := range rows {
-		numbers[i][0], _ = strconv.ParseFloat(row[0], 64)
-		numbers[i][1], _ = strconv.ParseFloat(row[1], 64)
+func convert(rows [][]string) [][]float64 {
+	var numbers [][]float64
+	for _, row := range rows {
+		f0, _ := strconv.ParseFloat(row[0], 64)
+		f1, _ := strconv.ParseFloat(row[0], 64)
+		number := []float64{f0, f1}
+		numbers = append(numbers, number)
 	}
 	return numbers
 }
