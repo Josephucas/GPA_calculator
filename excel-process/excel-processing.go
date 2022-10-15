@@ -6,9 +6,7 @@ import (
 	"strconv"
 )
 
-//从excel中读取自己的学分和成绩，用的是开源的库excelize，返回二维数组
-//这里不好的是，我没有返回一个切块，导致必须在excel中查看有多少们课，这里是63
-//后续可以改进
+//从excel中读取自己的学分和成绩，用的是开源的库excelize，返回二维切片
 
 func Read(path string) ([][]float64, error) {
 	var numbers [][]float64
@@ -32,21 +30,21 @@ func Read(path string) ([][]float64, error) {
 	}
 	numbers = convert(rows)
 	//print!
-	for _, row := range rows {
-		for _, colCell := range row {
-			fmt.Print(colCell, "\t")
-		}
-		fmt.Println()
-	}
+	//for _, row := range rows {
+	//	for _, colCell := range row {
+	//		fmt.Print(colCell, "\t")
+	//	}
+	//	fmt.Println()
+	//}
 	return numbers, nil
 }
 
-//转换将读取到的数据由string转换为float64类型的二维数组数据
+//转换将读取到的数据由string转换为float64类型的二维切片
 func convert(rows [][]string) [][]float64 {
 	var numbers [][]float64
 	for _, row := range rows {
 		f0, _ := strconv.ParseFloat(row[0], 64)
-		f1, _ := strconv.ParseFloat(row[0], 64)
+		f1, _ := strconv.ParseFloat(row[1], 64)
 		number := []float64{f0, f1}
 		numbers = append(numbers, number)
 	}

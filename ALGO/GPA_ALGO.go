@@ -27,6 +27,7 @@ func ToGpa(rows [][]float64) (float64, error) {
 	var Gps, credits float64
 
 	for _, row := range rows {
+
 		gp, _ := toGp(row)
 		Gps += gp
 		credits += row[1]
